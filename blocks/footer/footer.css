@@ -1,5 +1,5 @@
 footer {
-  background-color: var(--frescopa--color-background);
+  background-color: var(--frescopa-color-background);
   font: var(--type-body-2-default-font);
   letter-spacing: var(--type-body-2-default-letter-spacing);
 }
@@ -24,7 +24,7 @@ footer .section {
 
 
 footer h6 {
-  font-family: roboto;
+  font-family: roboto, sans-serif;
   font-weight: 500;
   font-size: 15px;
 }
@@ -43,7 +43,7 @@ footer .footer .section:last-child > .default-content-wrapper {
   margin: 0;
   font-size: 13px;
   text-decoration: none;
-  color: var(--frescopa--color-text);
+  color: var(--frescopa-color-text);
   margin-bottom: 10px;  
 }
 
@@ -51,7 +51,7 @@ footer .footer .section:last-child > .default-content-wrapper {
   font-size: 13px;
   font-weight: 300;
   text-decoration: none;
-  color: var(--frescopa--color-text);
+  color: var(--frescopa-color-text);
 }
 
 footer ul {

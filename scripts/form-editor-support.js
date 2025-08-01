@@ -158,8 +158,7 @@ function annotateItems(items, formDefinition, formFieldMap) {
       }
     }
   } catch (error) {
-    console.error('Error while annotating form elements', error);
-    window.alert('Error while annotating form elements');
+    console.error('Error while annotating form elements');
   }
 }
 

@@ -48,14 +48,12 @@ export default class GoogleReCaptcha {
         });
       });
       if (submit == null) {
-        console.warn('Captcha can not be loaded. Submit button is missing.');
-        alert('Captcha can not be loaded. Add Submit button.');
+        console.error('Captcha can not be loaded. Add Submit button.');
       } else {
         obs.observe(submit);
       }
     } else {
-      console.warn('Captcha configuration in missing.');
-      alert('Captcha can not be loaded. Captcha configuration in missing.');
+      console.error('Captcha can not be loaded. Captcha configuration in missing.');
     }
   }
 

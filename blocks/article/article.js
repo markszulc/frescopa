@@ -19,11 +19,11 @@ export default async function decorate(block) {
   const cfReq = await fetch(url, options)
     .then((response) => response.json())
     .then((contentfragment) => {
-      let articlepath = '';
+      let path = '';
       if (contentfragment.data) {
-        articlepath = contentfragment.data.articleByPath.item;
+        path = contentfragment.data.articleByPath.item;
       }
-      return articlepath;
+      return path;
     });
 
   const itemId = `urn:aemconnection:${articlepath}/jcr:content/data/master`;

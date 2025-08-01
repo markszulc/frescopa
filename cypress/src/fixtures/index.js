@@ -7,12 +7,11 @@ export const customerShippingAddress = {
   postCode: '78758',
   telephone: '1234567890',
   email: 'test@example.com',
-  region: 'TX,169',
+  region: Cypress.env('stateShippingId'),
   regionFull: 'Texas',
   countryFull: 'United States',
   countryCode: 'US',
   shippingMethod: 'Flat Rate - Fixed',
-  paymentMethod: 'Check / Money order',
 };
 
 export const customerBillingAddress = {
@@ -25,16 +24,30 @@ export const customerBillingAddress = {
   postCode: '12345',
   telephone: '0987654321',
   email: 'test_cypresstest@example.com',
-  region: 'NY,127',
+  region: Cypress.env('stateBillingId'),
   regionFull: 'New York',
   countryFull: 'United States',
   countryCode: 'US',
-  paymentMethod: 'Check / Money order',
-}
+};
+
+export const paymentServicesCreditCard = {
+  name: 'Credit Card',
+  code: 'payment_services_paypal_hosted_fields',
+  params: {
+    cc_number: '4111111111111111',
+    cc_exp: '12/2030',
+    cc_cid: '123',
+  }
+};
+
+export const checkMoneyOrder = {
+  name: 'Check / Money order',
+  code: 'checkmo',
+};
 
 export const products = {
   configurable: {
-    urlPath: "/products/frankie-sweatshirt/MH04",
-    urlPathWithOptions: "/products/frankie-sweatshirt/MH04?optionsUIDs=Y29uZmlndXJhYmxlLzU1Ni81Mjk%3D%2CY29uZmlndXJhYmxlLzI3Ny8yMDI%3D"
+    urlPath: "/products/cypress-configurable-product-latest/CYPRESS456",
+    urlPathWithOptions:  Cypress.env('productUrlWithOptions'),
   },
-}
+};

@@ -3,7 +3,8 @@ import { initializers } from '@dropins/tools/initializer.js';
 import { initialize, setFetchGraphQlHeaders } from '@dropins/storefront-order/api.js';
 import { checkIsAuthenticated, getHeaders } from '../configs.js';
 import { initializeDropin } from './index.js';
-import { fetchPlaceholders } from '../aem.js';
+import { fetchPlaceholders } from '../commerce.js';
+import { rootLink } from '../scripts.js';
 
 import {
   CUSTOMER_ORDER_DETAILS_PATH,
@@ -28,7 +29,7 @@ await initializeDropin(async () => {
   const orderNumber = searchParams.get('orderNumber');
   const isTokenProvided = orderRef && orderRef.length > 20;
 
-  setFetchGraphQlHeaders(await getHeaders('order'));
+  setFetchGraphQlHeaders((prev) => ({ ...prev, ...getHeaders('order') }));
 
   const labels = await fetchPlaceholders();
   const langDefinitions = {
@@ -81,11 +82,11 @@ async function handleUserOrdersRedirects(
 
   events.on('order/error', () => {
     if (checkIsAuthenticated()) {
-      window.location.href = CUSTOMER_ORDERS_PATH;
+      window.location.href = rootLink(CUSTOMER_ORDERS_PATH);
     } else if (isTokenProvided) {
-      window.location.href = orderNumber ? `${ORDER_STATUS_PATH}?orderRef=${orderNumber}` : ORDER_STATUS_PATH;
+      window.location.href = orderNumber ? rootLink(`${ORDER_STATUS_PATH}?orderRef=${orderNumber}`) : rootLink(ORDER_STATUS_PATH);
     } else {
-      window.location.href = `${ORDER_STATUS_PATH}?orderRef=${orderRef}`;
+      window.location.href = rootLink(`${ORDER_STATUS_PATH}?orderRef=${orderRef}`);
     }
   });
 
@@ -102,11 +103,18 @@ async function handleUserOrdersRedirects(
         : `${CUSTOMER_ORDER_DETAILS_PATH}?orderRef=${orderRef}`;
     }
   } else {
-    targetPath = !orderRef ? ORDER_STATUS_PATH : null;
+    // XWalk: prevent redirect on author if there is no valid order/token
+    // otherwise the page cant be edited eg. return-details, create-return
+    // eslint-disable-next-line no-lonely-if
+    if (window.xwalk?.isAuthorEnv) {
+      targetPath = null;
+    } else {
+      targetPath = !orderRef ? ORDER_STATUS_PATH : null;
+    }
   }
 
   if (targetPath) {
-    window.location.href = targetPath;
+    window.location.href = rootLink(targetPath);
   } else {
     await initializers.mountImmediately(initialize, {
       langDefinitions,

@@ -473,6 +473,7 @@ export default async function decorate(block) {
   if (typeof window.DELAYED_PHASE !== 'undefined') {
     // DELAYED_PHASE is defined, so hook to delayed-phase
     if (window.DELAYED_PHASE) {
+      // eslint-disable-next-line no-console
       console.log('DELAYED_PHASE is true, loading video.js');
       loadVideoJs();
     } else {

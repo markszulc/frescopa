@@ -1,3 +1,5 @@
+import * as fields from '../fields/index';
+
 export const assertCartSummaryProduct =
   (
     productName,
@@ -22,13 +24,11 @@ export const assertCartSummaryProduct =
       }
 
       cy.get(`${elem} .dropin-cart-item__price`)
-        .eq(productPosition)
         .should('contain', productPrice);
       cy.get(`${elem} .dropin-cart-item__total`)
         .eq(productPosition)
         .should('contain', totalPrice);
     };
-
 
 export const assertCartSummaryProductsOnCheckout = (
   productName,
@@ -93,7 +93,7 @@ export const assertTitleHasLink =
 export const assertProductImage =
   (productImageSrc) =>
     (elem = '.cart-cart') => {
-      cy.get(`${elem} img[src*="${productImageSrc}"]`)
+      cy.get(`${elem} img[src*="${productImageSrc}"]`, { matchCase: false })
         .should('be.visible')
         .and(($img) => expect($img[0].naturalWidth).to.be.gt(0));
     };
@@ -109,7 +109,7 @@ export const assertSelectedPaymentMethod = (
     .and('have.value', selected_payment_method);
 };
 
-export const assertOrderConfirmationCommonDetails = (customerDetails) => {
+export const assertOrderConfirmationCommonDetails = (customerDetails, paymentMethod) => {
   cy.get('.order-confirmation')
     .should(
       'contain',
@@ -119,13 +119,12 @@ export const assertOrderConfirmationCommonDetails = (customerDetails) => {
     .and('contain', 'Contact details')
     .and('contain', customerDetails.email)
     .and('contain', 'Payment method')
-    .and('contain', customerDetails.paymentMethod)
+    .and('contain', paymentMethod.name)
     .and('contain', 'Order summary');
   cy.contains('p', /ORDER #\d+/).should('be.visible');
   cy.get('.order-confirmation__order-cost-summary').should('exist');
   cy.get('a[role="link"]').should('contain', 'Continue shopping');
 };
-
 
 export const assertOrderConfirmationShippingDetails = (customerAddress) => {
   cy.get('.order-customer-details-content__container-shipping_address')
@@ -155,13 +154,12 @@ export const assertOrderConfirmationBillingDetails = (customerAddress) => {
 };
 
 export const assertOrderConfirmationShippingMethod = (
-  customerDelievryMethod
+  customerDeliveryMethod
 ) => {
   cy.get('.order-customer-details-content__container-shipping_methods')
     .should('contain', 'Shipping method')
-    .and('contain', customerDelievryMethod.shippingMethod);
-}
-
+    .and('contain', customerDeliveryMethod.shippingMethod);
+};
 export const assertAuthUser = (sign_up) => {
   cy.url().should('include', '/customer/account');
   cy.contains(sign_up.firstName).should("be.visible");
@@ -172,3 +170,95 @@ export const assertAuthUser = (sign_up) => {
 
 // imports and re-exports the functions from ./adobeDataLayer.js
 export * from './adobeDataLayer';
+
+export const assertGiftOptionsSummary = (title, price) => {
+  const summaryClassName = '.cart-order-summary__content';
+
+  cy.get(summaryClassName).contains(title).should('exist').should('be.visible');
+  if (price) {
+    cy.get(summaryClassName)
+      .contains(price)
+      .should('exist')
+      .should('be.visible');
+  }
+};
+
+export const assertGiftOptionsEmptyForm = (className) => {
+  cy.get(`${className} ${fields.giftOptionRecipientName}`).should(
+    'have.class',
+    'dropin-input--error'
+  );
+  cy.get(`${className} ${fields.giftOptionSenderName}`).should(
+    'have.class',
+    'dropin-input--error'
+  );
+  cy.get(`${className} ${fields.giftOptionMessage}`).should(
+    'have.class',
+    'dropin-textarea--error'
+  );
+};
+
+export const assertGiftOptionsReadOnlyFormView = () => {
+  const summaryClassName = '.cart-gift-options-view--readonly';
+  const cartClassName =
+    '.cart-cart-summary-list.cart-cart-summary-list__background--secondary';
+
+  cy.get(summaryClassName)
+    .contains('Selected gift order options')
+    .should('exist')
+    .should('be.visible');
+  cy.get(summaryClassName)
+    .contains('Use gift receipt')
+    .should('exist')
+    .should('be.visible');
+  cy.get(summaryClassName)
+    .contains('Selected gift order options')
+    .should('exist')
+    .should('be.visible');
+  cy.get(summaryClassName)
+    .contains('The receipt and order invoice will not show the price.')
+    .should('exist')
+    .should('be.visible');
+  cy.get(summaryClassName)
+    .contains('Use printed card')
+    .should('exist')
+    .should('be.visible');
+  cy.get(summaryClassName)
+    .contains('Gift wrap this order (+$30.00)')
+    .should('exist')
+    .should('be.visible');
+  cy.get(summaryClassName)
+    .contains('Foil Finish Paper')
+    .should('exist')
+    .should('be.visible');
+  cy.get(summaryClassName)
+    .contains('giftOptionRecipientName')
+    .should('exist')
+    .should('be.visible');
+  cy.get(summaryClassName)
+    .contains('giftOptionSenderName')
+    .should('exist')
+    .should('be.visible');
+  cy.get(summaryClassName)
+    .contains('giftOptionMessage')
+    .should('exist')
+    .should('be.visible');
+
+  cy.get(cartClassName).contains('This item is a gift').click();
+  cy.get(cartClassName)
+    .contains('Foil Finish Paper')
+    .should('exist')
+    .should('be.visible');
+  cy.get(cartClassName)
+    .contains('giftOptionRecipientName')
+    .should('exist')
+    .should('be.visible');
+  cy.get(cartClassName)
+    .contains('giftOptionSenderName')
+    .should('exist')
+    .should('be.visible');
+  cy.get(cartClassName)
+    .contains('giftOptionMessage')
+    .should('exist')
+    .should('be.visible');
+};

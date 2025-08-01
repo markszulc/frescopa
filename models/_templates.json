@@ -1,0 +1,354 @@
+{
+  "models": [
+    {
+      "id": "page-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "enrichment-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "enrichment",
+          "readOnly": true
+        },
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Title",
+          "valueType": "string",
+          "value": "",
+          "description": "Title of the enrichment"
+        },
+        {
+          "component": "text",
+          "name": "enrichment-products",
+          "label": "Product SKU's to match with",
+          "valueType": "string",
+          "multi": true
+        },
+        {
+          "component": "text",
+          "name": "enrichment-categories",
+          "label": "Product Categories to match with",
+          "valueType": "string",
+          "multi": true
+        },
+        {
+          "component": "text",
+          "name": "enrichment-positions",
+          "label": "Positions to match with",
+          "valueType": "string",
+          "multi": true
+        }
+      ]
+    },
+    {
+      "id": "pdp-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "pdp",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "order-details-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "order-details",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "plp-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "plp",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "cart-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "cart",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "mini-cart-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "mini-cart",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "checkout-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "checkout",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "search-order-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "search-order",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "search-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "search",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "login-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "login",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "forgot-password-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "forgot-password",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "create-account-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "create-account",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "account-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "account",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "orders-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "orders",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "address-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "address",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "returns-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "returns",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "account-order-details-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "account-order-details",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "order-status-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "order-status",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "return-details-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "return-details",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "create-return-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "create-return",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "confirm-account-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "confirm-account",
+          "readOnly": true
+        }
+      ]
+    },
+    {
+      "id": "create-password-metadata",
+      "fields":
+      [
+        {
+          "component": "text",
+          "name": "template",
+          "label": "Template",
+          "valueType": "string",
+          "value": "create-password",
+          "readOnly": true
+        }
+      ]
+    }
+  ]
+}

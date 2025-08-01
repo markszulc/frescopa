@@ -32,6 +32,24 @@
               "value": "",
               "label": "Headline",
               "valueType": "string"
+            },{
+              "component": "text-input",
+              "name": "subhead",
+              "value": "",
+              "label": "Subhead",
+              "valueType": "string"
+            },{
+              "component": "text-input",
+              "name": "search-placeholder",
+              "value": "",
+              "label": "Search Placeholder",
+              "valueType": "string"
+            },{
+              "component": "text-input",
+              "name": "cta",
+              "value": "",
+              "label": "Search Button Text",
+              "valueType": "string"
             }
           ]
         }

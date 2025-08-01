@@ -55,6 +55,10 @@
               "value": "article"
             },
             {
+              "name": "Blog",
+              "value": "blog"
+            },
+            {
               "name": "Columns",
               "value": "columns"
             }
@@ -80,6 +84,7 @@
         "fragment",
         "offer",
         "storelocator",
+        "blog-list",
         "product-recommendations",
         "product-teaser",
         "product-list-page",
@@ -88,7 +93,9 @@
         "video",
         "form",
         "reward",
-        "reward-sticky"
+        "reward-sticky",
+        "sticky-cta",
+        "quiz"
       ]
     }
   ]

@@ -1,5 +1,4 @@
 /* eslint-disable import/no-unresolved */
-import { events } from '@dropins/tools/event-bus.js';
 import { debounce } from '@dropins/tools/lib.js';
 
 export function scrollToElement(element) {
@@ -112,24 +111,19 @@ export function setAddressOnCart({ api, debounceMs = 0, placeOrderBtn = null }) 
 
 export function estimateShippingCost({ api, debounceMs = 0 }) {
   let prevEstimateShippingData = {};
+  let shouldCancelDebounce = false;
 
   const debouncedApi = debounce((data) => {
-    const criteria = {
+    if (shouldCancelDebounce) return;
+
+    const estimateShippingInputCriteria = {
       country_code: data.countryCode,
       region_name: String(data.region.regionCode || ''),
       region_id: String(data.region.regionId || ''),
+      zip: data.postcode,
     };
 
-    api({ criteria });
-
-    events.emit('checkout/estimate-shipping-address', {
-      address: {
-        country_id: data.countryCode,
-        region: String(data.region.regionCode || ''),
-        region_id: String(data.region.regionId || ''),
-        postcode: data.postcode,
-      },
-    });
+    api({ criteria: estimateShippingInputCriteria });
 
     prevEstimateShippingData = {
       countryCode: data.countryCode,
@@ -140,7 +134,10 @@ export function estimateShippingCost({ api, debounceMs = 0 }) {
   }, debounceMs);
 
   return ({ data, isDataValid }) => {
-    if (isDataValid) return;
+    if (isDataValid) {
+      shouldCancelDebounce = true;
+      return;
+    }
 
     if (
       prevEstimateShippingData.countryCode === data.countryCode

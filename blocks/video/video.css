@@ -126,7 +126,7 @@ main>.section.video-container {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
-  padding: 0px;
+  padding: 0;
   list-style: none;
 }
 

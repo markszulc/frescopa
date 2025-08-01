@@ -325,9 +325,6 @@ function inputDecorator(field, element) {
     if (field.required) {
       input.setAttribute('required', 'required');
     }
-    if (field.description) {
-      input.setAttribute('aria-describedby', `${field.id}-description`);
-    }
     if (field.minItems) {
       input.dataset.minItems = field.minItems;
     }

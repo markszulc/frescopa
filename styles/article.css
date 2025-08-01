@@ -4,7 +4,7 @@
 
 /* Article header */
 main > .section.article h1 {
-    font: normal normal normal 56px/60px Baskerville;
+    font: normal normal normal 56px/60px Baskerville, serif;
     text-align: center;
 }
 

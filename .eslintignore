@@ -1,9 +1,7 @@
 helix-importer-ui
-scripts/htm.js
 scripts/acdl
 tools/picker
 tools/segments
-tools/sidekick
 tools/pdp-metadata
 scripts/__dropins__
 scripts/commerce-events-collector.js
@@ -11,12 +9,10 @@ scripts/commerce-events-sdk.js
 scripts/widgets
 plugins/
 cypress/
-models/
-component-filters.json
-component-definition.json
 component-models.json
-blocks/**/*.json
-*.json
+scripts/htm.js
+dompurify.min.js
 blocks/form/rules/formula/*
 blocks/form/rules/model/*
+blocks/form/rules/functionRegistration.js
 blocks/video/videojs/video.min.js

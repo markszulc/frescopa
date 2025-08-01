@@ -32,19 +32,139 @@
       "id": "blocks",
       "components": [
         {
-          "...": "../blocks/*/_*.json#/definitions"
+          "...": "../blocks/cards/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/columns/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/fragment/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/hero/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/offer/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/store-locator/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/quiz/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/bloglist/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/teaser/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/form/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/reward/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/reward-sticky/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/sticky-cta/_*.json#/definitions"
         }
       ]
     },
     {
-      "title": "Commerce",
-      "id": "commerce",
+      "title": "Product",
+      "id": "product",
       "components": [
         {
-          "...": "../blocks/commerce-*/_*.json#/definitions"
+          "...": "../blocks/product-*/_*.json#/definitions"
         },
         {
-          "...": "../blocks/product-*/_*.json#/definitions"
+          "...": "../blocks/enrichment/_*.json#/definitions"
+        }
+      ]
+    },
+    {
+      "title": "Cart",
+      "id": "cart",
+      "components": [
+        {
+          "...": "../blocks/commerce-mini-cart/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-cart/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-checkout/_*.json#/definitions"
+        }
+      ]
+    },
+    {
+      "title": "Order",
+      "id": "order",
+      "components": [
+        {
+          "...": "../blocks/commerce-order-*/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-shipping-status/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-customer-details/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-search-order/_*.json#/definitions"
+        }
+      ]
+    },
+    {
+      "title": "Account",
+      "id": "account",
+      "components": [
+        {
+          "...": "../blocks/commerce-login/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-forgot-password/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-create-account/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-account-sidebar/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-account-header/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-orders-list/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-addresses/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-customer-information/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-returns-list/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-create-password/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-confirm-account/_*.json#/definitions"
+        }
+      ]
+    },
+    {
+      "title": "Return",
+      "id": "return",
+      "components": [
+        {
+          "...": "../blocks/commerce-return-header/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/commerce-create-return/_*.json#/definitions"
         }
       ]
     }

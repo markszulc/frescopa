@@ -12,6 +12,14 @@
  * governing permissions and limitations under the License.
  */
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(*) {
+  animation-duration: 0.5s;
+}
+
 /* stylelint-disable no-empty-source */
 :root, .dropin-design {
   /* Adobe Commerce Dropin design tokens */
@@ -146,14 +154,13 @@
   --background-color: var(--color-neutral-50);
   --nav-height: 70px;
   --site-width: 1360px;
-
-  --frescopa--color-background: #F4E9DC;
-  --frescopa--color-brand: #A33532;
-  --frescopa--color-primary: #00647D;
-  --frescopa--color-secondary: #DC6E52;
-  --frescopa--color-tertiary: #EBA439;
-  --frescopa--color-text: #58181D;
-  --frescopa--color-black: #2C2C2C;
+  --frescopa-color-background: #F4E9DC;
+  --frescopa-color-brand: #A33532;
+  --frescopa-color-primary: #00647D;
+  --frescopa-color-secondary: #DC6E52;
+  --frescopa-color-tertiary: #EBA439;
+  --frescopa-color-text: #58181D;
+  --frescopa-color-black: #2C2C2C;
 }
 
 /* fallback fonts */
@@ -171,6 +178,16 @@
 
 html, body {
   min-height: 100dvh;
+}
+
+html.adobe-ue-preview,
+html.adobe-ue-edit {
+  height: unset
+}
+
+html.adobe-ue-preview body,
+html.adobe-ue-edit body {
+  height: unset
 }
 
 html {
@@ -229,29 +246,29 @@ h6 {
 }
 
 h1 {
-  font: var(--type-display-1-font);
+  font: normal normal normal 56px/56px Baskerville, serif;
   letter-spacing: var(--type-display-1-letter-spacing);
 }
 
 h2 {
-  font: var(--type-display-2-font);
+  font: normal normal normal 48px/52px Baskerville, serif;
   letter-spacing: var(--type-display-2-letter-spacing);
 }
 
 h3 {
-  font: normal normal normal 36px/42px Baskerville;
+  font: normal normal normal 36px/42px Baskerville, serif;
   letter-spacing: var(--type-display-3-letter-spacing);
 }
 
 h4 {
-  font: normal normal normal 32px/32px Baskerville;
-  letter-spacing: 0px;
+  font: normal normal normal 32px/32px Baskerville, serif;
+  letter-spacing: 0;
   margin-bottom: 10px;
 }
 
 h5 {
-  font: normal normal normal 24px/30px Baskerville;
-  letter-spacing: 0px
+  font: normal normal normal 24px/30px Baskerville, serif;
+  letter-spacing: 0
 }
 
 h6 {
@@ -260,9 +277,11 @@ h6 {
 }
 
 p {
-  font: normal normal normal 18px/24px Roboto;
-  letter-spacing: 0px;
+  font: normal normal normal 18px/24px Roboto, sans-serif;
+  letter-spacing: 0;
 }
+
+
 
 p,
 dl,
@@ -313,7 +332,7 @@ button {
 
 /* links */
 a:not(.dropin-design a) {
-  color: var(--frescopa--color-text);
+  color: var(--frescopa-color-text);
   letter-spacing: var(--type-body-1-strong-letter-spacing);
   text-decoration: underline solid transparent;
   text-decoration-thickness: 2px;
@@ -322,7 +341,7 @@ a:not(.dropin-design a) {
 }
 
 a:not(.dropin-design a):hover {
-  text-decoration: underline solid Currentcolor;
+  text-decoration: underline solid currentcolor;
 }
 
 /* buttons */
@@ -375,10 +394,6 @@ button.button.secondary {
 main a.button.secondary:hover,
 button.button.secondary:hover {
   color: var(--color-brand-600);
-}
-
-main input:hover {
-  border: var(--shape-border-width-1) solid var(--color-neutral-700);
 }
 
 main blockquote {
@@ -517,23 +532,23 @@ main[hidden] {
 
 
 .frescopa-background-red {
-  background-color: var(--frescopa--color-brand);
+  background-color: var(--frescopa-color-brand);
 }
 
 .frescopa-background-yellow {
-  background-color: var(--frescopa--color-tertiary);
+  background-color: var(--frescopa-color-tertiary);
 }
 
 .frescopa-background-blue {
-  background-color: var(--frescopa--color-primary);
+  background-color: var(--frescopa-color-primary);
 }
 
 .frescopa-background-beige {
-  background-color: var(--frescopa--color-background);
+  background-color: var(--frescopa-color-background);
 }
 
 .frescopa-background-black {
-  background-color: var(--frescopa--color-black);
+  background-color: var(--frescopa-color-black);
 }
 
 main > .section + .numbered {
@@ -545,12 +560,11 @@ main > .section + .card-tiles > div {
 }
 
 main > .section + .background {
-  background-color: var(--frescopa--color-background);
   max-width: 1360px;
-  padding: 10px 0px;
+  padding: 10px 0;
   margin-left: auto;
   margin-right: auto;
-  background: url('../../styles/backgrounds/big.svg') no-repeat center center/cover;
+  background: var(--frescopa-color-background) url('../../styles/backgrounds/big.svg') no-repeat center center/cover;
 }
 
 main > .section + .background > div {
@@ -562,8 +576,10 @@ main > .section + .background > div {
   main > .section + .background {
     border-radius: 12px;
     padding: 50px 0 2px;
+    margin-top: -20px;
   }
 }
+
 /* Section layout variations */
 .section.columns {
   display: flex;
@@ -588,4 +604,31 @@ main > .section + .background > div {
       flex-direction: column;
       padding: 0;
   }
+}
+
+.blog .default-content-wrapper {
+  max-width: 1200px;
+
+p:not(:last-child):has(+ p) {
+  margin-bottom: 1.5625em;
+}
+
+/* Remove default bottom margin for p if not followed by another p */
+p:not(:has(+ p)) {
+  margin-bottom: 0;
+}
+
+
+}
+
+.blog > .default-content-wrapper > p:first-of-type {
+  font-size: 2.4rem;
+  line-height: 1.4;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.blog > .default-content-wrapper .button {
+  margin-top: 40px;
+  margin-bottom: 40px;
 }

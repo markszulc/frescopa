@@ -1,0 +1,39 @@
+.blog-list {
+
+    margin-top: 40px;
+
+    ul { 
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        flex-wrap: wrap;
+        text-decoration: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        list-style: none;
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0 0 0 / 12%);
+        position: relative;
+        max-width: 440px;
+
+
+        h5 {
+            padding: 10px 20px;
+            margin: 0;
+        }
+    }
+
+     ul > li img {
+        min-width: 440px;
+        max-height: 360px;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+
+    }
+}

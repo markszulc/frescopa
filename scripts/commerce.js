@@ -1,8 +1,75 @@
 /* eslint-disable import/prefer-default-export, import/no-cycle */
+import { getMetadata } from './aem.js';
 import {
-  getConfigValue, getCookie, getHeaders,
+  getHeaders,
+  getConfigValue,
+  getCookie,
+  getRootPath,
 } from './configs.js';
 import { getConsent } from './scripts.js';
+
+/**
+ * Gets placeholders object.
+ * @param {string} [prefix] Location of placeholders
+ * @returns {object} Window placeholders object
+ */
+// eslint-disable-next-line import/prefer-default-export
+export async function fetchPlaceholders(prefix = 'default') {
+  const overrides = getMetadata('placeholders') || getRootPath().replace(/\/$/, '/placeholders.json') || '';
+  const [fallback, override] = overrides.split('\n');
+  window.placeholders = window.placeholders || {};
+
+  if (!window.placeholders[prefix]) {
+    window.placeholders[prefix] = new Promise((resolve) => {
+      const url = fallback || `${prefix === 'default' ? '' : prefix}/placeholders.json`;
+      Promise.all([fetch(url), override ? fetch(override) : Promise.resolve()])
+        // get json from sources
+        .then(async ([resp, oResp]) => {
+          if (resp.ok) {
+            if (oResp?.ok) {
+              return Promise.all([resp.json(), await oResp.json()]);
+            }
+            return Promise.all([resp.json(), {}]);
+          }
+          return [{}];
+        })
+        // process json from sources
+        .then(([json, oJson]) => {
+          const placeholders = {};
+
+          const allKeys = new Set([
+            ...(json.data?.map(({ Key }) => Key) || []),
+            ...(oJson?.data?.map(({ Key }) => Key) || []),
+          ]);
+
+          allKeys.forEach((Key) => {
+            if (!Key) return;
+            const keys = Key.split('.');
+            const originalValue = json.data?.find((item) => item.Key === Key)?.Value;
+            const overrideValue = oJson?.data?.find((item) => item.Key === Key)?.Value;
+            const finalValue = overrideValue ?? originalValue;
+            const lastKey = keys.pop();
+            const target = keys.reduce((obj, key) => {
+              obj[key] = obj[key] || {};
+              return obj[key];
+            }, placeholders);
+            target[lastKey] = finalValue;
+          });
+
+          window.placeholders[prefix] = placeholders;
+          resolve(placeholders);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('error loading placeholders', error);
+          // error loading placeholders
+          window.placeholders[prefix] = {};
+          resolve(window.placeholders[prefix]);
+        });
+    });
+  }
+  return window.placeholders[`${prefix}`];
+}
 
 /* Common query fragments */
 export const priceFieldsFragment = `fragment priceFields on ProductViewPrice {
@@ -21,10 +88,32 @@ export const priceFieldsFragment = `fragment priceFields on ProductViewPrice {
   }
 }`;
 
+/**
+ * Creates a short hash from an object by sorting its entries and hashing them.
+ * @param {Object} obj - The object to hash
+ * @param {number} [length=5] - Length of the resulting hash
+ * @returns {string} A short hash string
+ */
+function createHashFromObject(obj, length = 5) {
+  // Sort entries by key and create a string of key-value pairs
+  const objString = Object.entries(obj)
+    .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
+    .map(([key, value]) => `${key}:${value}`)
+    .join('|');
+
+  // Create a short hash using a simple string manipulation
+  return objString
+    .split('')
+    .reduce((hash, char) => (hash * 31 + char.charCodeAt(0)) % 2147483647, 0)
+    .toString(36)
+    .slice(0, length);
+}
+
 export async function commerceEndpointWithQueryParams() {
-  const urlWithQueryParams = new URL(await getConfigValue('commerce-endpoint'));
-  // Set some query parameters for use as a cache-buster. No other purpose.
-  urlWithQueryParams.searchParams.append('ac-storecode', await getConfigValue('commerce.headers.cs.Magento-Store-Code'));
+  const urlWithQueryParams = new URL(getConfigValue('commerce-endpoint'));
+  const headers = getHeaders('cs');
+  const shortHash = createHashFromObject(headers);
+  urlWithQueryParams.searchParams.append('cb', shortHash);
   return urlWithQueryParams;
 }
 
@@ -32,7 +121,7 @@ export async function commerceEndpointWithQueryParams() {
 
 export async function performCatalogServiceQuery(query, variables) {
   const headers = {
-    ...(await getHeaders('cs')),
+    ...(getHeaders('cs')),
     'Content-Type': 'application/json',
   };
 
@@ -60,11 +149,11 @@ export function getSignInToken() {
 }
 
 export async function performMonolithGraphQLQuery(query, variables, GET = true, USE_TOKEN = false) {
-  const GRAPHQL_ENDPOINT = await getConfigValue('commerce-core-endpoint');
+  const GRAPHQL_ENDPOINT = getConfigValue('commerce-core-endpoint');
 
   const headers = {
     'Content-Type': 'application/json',
-    Store: await getConfigValue('commerce.headers.cs.Magento-Store-View-Code'),
+    Store: getConfigValue('headers.cs.Magento-Store-View-Code'),
   };
 
   if (USE_TOKEN) {
@@ -146,8 +235,15 @@ export function renderPrice(product, format, html = (strings, ...values) => stri
 
 export function getSkuFromUrl() {
   const path = window.location.pathname;
-  const result = path.match(/\/products\/[\w|-]+\/([\w|-]+)$/);
-  return result?.[1];
+  const result = path.match(/\/products\/[\w|-]+\/([\w|-]+)(\.html)?$/);
+  let sku = result?.[1];
+  // Xwalk: If in AEM authoring environment, try to get fallback sku from page metadata
+  // if url does not resolve to a valid sku
+  if (!sku && window.xwalk.previewSku) {
+    sku = window.xwalk.previewSku;
+  }
+
+  return sku;
 }
 
 export function getOptionsUIDsFromUrl() {
@@ -159,7 +255,7 @@ export async function trackHistory() {
     return;
   }
   // Store product view history in session storage
-  const storeViewCode = await getConfigValue('commerce.headers.cs.Magento-Store-View-Code');
+  const storeViewCode = getConfigValue('headers.cs.Magento-Store-View-Code');
   window.adobeDataLayer.push((dl) => {
     dl.addEventListener('adobeDataLayer:change', (event) => {
       if (!event.productContext) {

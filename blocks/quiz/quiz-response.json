@@ -1,0 +1,145 @@
+{
+    "data": {
+      "quizByPath": {
+        "item": {
+          "questions": [
+            {
+              "question": "Where would you choose to enjoy your favourite coffee?",
+              "options": [
+                {
+                  "description": "With your toes in the sand",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/stock/AdobeStock_301744771.jpeg"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                },
+                {
+                  "description": "Watching the sunrise",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/stock/AdobeStock_269475201.jpeg"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                },
+                {
+                  "description": "In a rustic villa abroad",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/stock/AdobeStock_229550022.jpeg"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                },
+                {
+                  "description": "Cozied up in a cabin",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/stock/AdobeStock_249790077.jpeg"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                }
+              ]
+            },
+            {
+              "question": "How many cups of coffee do you make a day?",
+              "options": [
+                {
+                  "description": "1 Cup",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/stock/Artistic/Frescopa%20coffee%20artistic%20101.png"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                },
+                {
+                  "description": "2 Cups",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/stock/Artistic/Frescopa%20coffee%20artistic%20112.png"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                },
+                {
+                  "description": "3-4 Cups",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/stock/Artistic/Frescopa%20coffee%20artistic%20105.png"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                },
+                {
+                  "description": "5+ Cups",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/stock/Artistic/Frescopa%20coffee%20artistic%20108.png"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                }
+              ]
+            },
+            {
+              "question": "How do you like to make your coffee?",
+              "options": [
+                {
+                  "description": "French Press",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/line-art/accessories.png"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                },
+                {
+                  "description": "Coffee Pods",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/line-art/coffeepods.png"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                },
+                {
+                  "description": "Espresso Machine",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/frescopa/en/line-art/machine.png"
+                  },
+                  "minOption": null,
+                  "maxOption": null
+                }
+              ]
+            },
+            {
+              "question": "What flavour profile describes your perfect cup",
+              "options": [
+                {
+                  "description": null,
+                  "image": null,
+                  "minOption": "Light Roast",
+                  "maxOption": "Dark Roast"
+                },
+                {
+                  "description": null,
+                  "image": null,
+                  "minOption": "Floral",
+                  "maxOption": "Fruity"
+                },
+                {
+                  "description": null,
+                  "image": null,
+                  "minOption": "Herbal",
+                  "maxOption": "Nutty"
+                },
+                {
+                  "description": "none eesp",
+                  "image": {
+                    "_publishUrl": "https://publish-p149891-e1546481.adobeaemcloud.com/content/dam/www_static_adobe/template/61683b3e73ec6d64b58437d9_blog-2.jpg"
+                  },
+                  "minOption": "Carmel",
+                  "maxOption": "Chocolatey"
+                }
+              ]
+            }
+          ],
+          "answer": null
+        }
+      }
+    }
+  }

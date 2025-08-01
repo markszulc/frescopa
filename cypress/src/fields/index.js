@@ -69,6 +69,19 @@ export const billToShippingAddress =
 // Shipping Methods
 export const shippingMethods = 'div[class*="checkout-shipping-methods"]';
 
+// Payment Methods
+export const paymentMethods = '.checkout-payment-methods__method';
+
+export const creditCardNumberIFrame =
+  '.payment-services-credit-card-form__card-number iframe';
+export const creditCardNumber = 'input[name="credit-card-number"]';
+export const creditCardExpIFrame =
+  '.payment-services-credit-card-form__expiration-date iframe';
+export const creditCardExp = 'input[name="expiration"]';
+export const creditCardCvvIFrame =
+  '.payment-services-credit-card-form__security-code iframe';
+export const creditCardCvv = 'input[name="cvv"]';
+
 // Place Order
 export const placeOrderButton = 'button[class*="checkout-place-order__button"]';
 
@@ -111,3 +124,18 @@ export const submitCancelOrderButton =
   '[data-testid="order-cancel-submit-button"]';
 export const cancellationReasonsModal =
   '[data-testid="order-cancellation-reasons-modal"]';
+
+export const termsAndConditionsCheckbox =
+  'input[name="default"][type="checkbox"]';
+
+// Gift card and options
+export const orderSummary = '.cart__order-summary';
+export const giftCardField = 'input[name="giftCardCode"]';
+export const giftOptionCardIncludedCheckBox =
+  'input[name="printedCardIncluded"]';
+export const giftOptionWrapCheckBox = 'input[name*="isGiftWrappingSelected"]';
+export const giftOptionRecipientName = 'input[name="recipientName"]';
+export const giftOptionSenderName = 'input[name="senderName"]';
+export const giftOptionMessage = 'textarea[name="message"]';
+export const giftOptionGiftReceiptIncluded =
+  'input[name="giftReceiptIncluded"]';

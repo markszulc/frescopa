@@ -1,11 +1,12 @@
-/* eslint-disable object-curly-spacing, class-methods-use-this */
+/* eslint-disable object-curly-spacing, class-methods-use-this, import/no-cycle */
 import {
   h, Component, Fragment,
 } from '@dropins/tools/preact.js';
-import htm from '../../scripts/htm.js';
+import htm from './htm.js';
 import {
   renderPrice,
 } from '../../scripts/commerce.js';
+import { rootLink } from '../../scripts/scripts.js';
 
 const html = htm.bind(h);
 const searchUnitId = 'livesearch-plp';
@@ -83,15 +84,15 @@ class ProductCard extends Component {
     return html`
       <li index=${index} ref=${secondLastProduct}>
         <div class="picture">
-          <a onClick=${() => this.onProductClick(product)} href="/products/${product.urlKey}/${product.sku}">
+          <a onClick=${() => this.onProductClick(product)} href="${rootLink(`/products/${product.urlKey}/${product.sku}`)}">
             ${this.renderImage(index < numberOfEagerImages ? 'eager' : 'lazy')}
           </a>
         </div>
         <div class="name">
-          <a onClick=${() => this.onProductClick(product)} href="/products/${product.urlKey}/${product.sku}" dangerouslySetInnerHTML=${{__html: product.name}} />
+          <a onClick=${() => this.onProductClick(product)} href="${rootLink(`/products/${product.urlKey}/${product.sku}`)}" dangerouslySetInnerHTML=${{__html: product.name}} />
         </div>
         <div class="description">
-          <a onClick=${() => this.onProductClick(product)} href="/products/${product.urlKey}/${product.sku}" dangerouslySetInnerHTML=${{__html: product.shortDescription}} />
+          <a onClick=${() => this.onProductClick(product)} href="${rootLink(`/products/${product.urlKey}/${product.sku}`)}" dangerouslySetInnerHTML=${{__html: product.shortDescription}} />
         </div>
         <div class="price">${renderPrice(product, this.formatter.format, html, Fragment)}</div>
       </li>`;

@@ -2,6 +2,7 @@ import { Icon, provider as uiProvider } from '@dropins/tools/components.js';
 import { render as accountRenderer } from '@dropins/storefront-account/render.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { CUSTOMER_ORDERS_PATH } from '../../scripts/constants.js';
+import { rootLink } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
   const fragment = await loadFragment('/customer/sidebar-fragment');
@@ -9,15 +10,15 @@ export default async function decorate(block) {
   const sidebarItems = Array.from(sidebarItemsConfig).map((item) => {
     const itemParams = Array.from(item.querySelectorAll('ol > li'));
     const itemConfig = {
-      itemTitle: item.childNodes[0]?.textContent.trim() || 'Default Title',
+      itemTitle: item.querySelector('a')?.textContent.trim() || 'Default Title',
+      itemLink: item.querySelector('a')?.getAttribute('href') || '#',
       itemSubtitle: itemParams[0]?.innerText || '',
-      itemLink: itemParams[1]?.innerText || '#',
-      itemIcon: itemParams[2]?.innerText || 'Placeholder',
+      itemIcon: itemParams[1]?.innerText || 'Placeholder',
     };
 
     const menuItemEl = document.createElement('a');
     menuItemEl.classList.add('commerce-account-sidebar-item');
-    menuItemEl.href = itemConfig.itemLink;
+    menuItemEl.href = rootLink(itemConfig.itemLink);
 
     const isItemActive = (
       itemConfig.itemLink === CUSTOMER_ORDERS_PATH

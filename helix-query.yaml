@@ -31,6 +31,10 @@ indices:
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")
+      category:
+        select: head > meta[name="category"]
+        value: |
+          attribute(el, 'content')
   enrichment:
     target: /enrichment/enrichment.json
     include:

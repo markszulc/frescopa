@@ -20,6 +20,7 @@
       "fragment",
       "offer",
       "storelocator",
+      "blog-list",
       "product-recommendations",
       "product-teaser",
       "product-list-page",
@@ -28,7 +29,9 @@
       "video",
       "form",
       "reward",
-      "reward-sticky"
+      "reward-sticky",
+      "sticky-cta",
+      "quiz"
     ]
   },
   {

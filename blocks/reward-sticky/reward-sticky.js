@@ -1,9 +1,7 @@
-import { getAEMPublish, getAEMAuthor } from '../../scripts/endpointconfig.js';
-
 /* eslint-disable no-underscore-dangle */
 export default async function decorate(block) {
   const props = [...block.children].map((row) => row.firstElementChild);
-  const [pictureContainer, eyebrow, title, longDescr, shortDescr, firstCta, secondCta] = props;
+  const [, , , , , firstCta] = props;
 
   block.innerHTML = `
   <div class='reward-sticky'>

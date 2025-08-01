@@ -1,14 +1,13 @@
 .article-content {
   border-radius: 12px;
-  padding: 50px 250px 50px 250px;
+  padding: 50px 250px;
   margin-bottom: 40px;
   display: flex;
   gap: 120px;
-  background: var(--frescopa--color-brand);
+  background: var(--frescopa-color-brand);
   text-align: center;
 }
 
 .article-content h4,p {
-
   color: #fff;
 }
