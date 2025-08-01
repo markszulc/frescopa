@@ -1,0 +1,71 @@
+name: Sync Upstream (keep local config)
+
+on:
+  workflow_dispatch:          # manual trigger
+
+env:
+  USER_NAME: Mark Szulc
+  USER_EMAIL: mszulc@adobe.com
+  
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      #0. Set the git config
+      - name: Set Git identity
+        run: |
+          git config --global credential.helper cache
+          git config --global user.email ${USER_EMAIL}
+          git config --global user.name ${USER_NAME}
+
+      # 1. Check out your fork, full history
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # 2. Back up your local config
+      - name: Backup local config
+        run: |
+          mkdir -p backup
+          cp fstab.yaml backup/fstab.yaml
+          cp scripts/endpointconfig.js backup/endpointconfig.js
+          cp sitemap-index.xml backup/sitemap-index.xml
+          cp tools/sidekick/config.json backup/config.json
+
+      # 3. Add the upstream remote and fetch it
+      - name: Fetch upstream
+        run: |
+          git remote add upstream https://github.com/aem-showcase/frescopa.git
+          git fetch upstream
+
+      # 4. Merge upstream/main into your main (or master)
+      - name: Merge upstream changes
+        run: |
+          git checkout main
+          git merge upstream/main --no-ff --no-edit -s recursive -X theirs
+
+      # 5. Restore your backed-up config.json
+      - name: Restore config.json
+        run: |
+          mv backup/fstab.yaml fstab.yaml
+          mv backup/endpointconfig.js scripts/endpointconfig.js 
+          mv backup/sitemap-index.xml sitemap-index.xml 
+          mv backup/config.json tools/sidekick/config.json 
+
+      # 6. Commit & push any merge commits (only if there are real updates)
+      - name: Commit & push
+        run: |
+          if ! git diff --quiet; then
+            git add fstab.yaml
+            git add scripts/endpointconfig.js
+            git add sitemap-index.xml
+            git add tools/sidekick/config.json
+            git commit -m "chore: sync with upstream, preserve local config"
+            git push origin main
+          fi
+          
