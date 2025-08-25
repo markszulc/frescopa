@@ -66,5 +66,13 @@ if (map) {
   loadScript('/blocks/store-locator/location-init.js', { defer: true });
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  var meta = document.createElement('meta');
+  meta.name = 'urn:adobe:aue:config:preview';
+  meta.content = 'https://japac.frescopa.coffee';
+  document.head.appendChild(meta);
+});
+
+
 document.dispatchEvent(new Event('delayed-phase'));
 Window.DELAYED_PHASE = true;
