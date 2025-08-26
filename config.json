@@ -5,8 +5,8 @@
         "author": "https://author-p149891-e1546481.adobeaemcloud.com",
         "publish": "https://publish-p149891-e1546481.adobeaemcloud.com"
       },
-      "commerce-core-endpoint": "https://na1.api.commerce.adobe.com/L54FdPU9mRQh5Ng7BBuvT4/graphql",
-      "commerce-endpoint": "https://na1.api.commerce.adobe.com/L54FdPU9mRQh5Ng7BBuvT4/graphql",
+      "commerce-core-endpoint": "https://edge-graph.adobe.io/api/6df0cdbc-9a99-4df5-ba7d-cbd19d3a0dbd/graphql",
+      "commerce-endpoint": "https://edge-graph.adobe.io/api/6df0cdbc-9a99-4df5-ba7d-cbd19d3a0dbd/graphql",
       "headers": {
         "all": {
           "Store": "default"
