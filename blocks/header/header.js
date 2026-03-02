@@ -178,6 +178,7 @@ export default async function decorate(block) {
   }
   const fragment = await loadFragment(navPath);
 
+
   // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
@@ -226,7 +227,12 @@ export default async function decorate(block) {
       });
   }
 
-  const navTools = nav.querySelector('.nav-tools');
+  let navTools = nav.querySelector('.nav-tools');
+  if (!navTools) {
+    navTools = document.createElement('div');
+    navTools.classList.add('nav-tools');
+    nav.append(navTools);
+  }
 
   /** Mini Cart */
   const excludeMiniCartFromPaths = ['/checkout'];
@@ -239,23 +245,22 @@ export default async function decorate(block) {
    `);
 
   navTools.append(minicart);
-
   const minicartPanel = navTools.querySelector('.minicart-panel');
-
   const cartButton = navTools.querySelector('.nav-cart-button');
 
-  if (excludeMiniCartFromPaths.includes(window.location.pathname)) {
+  if (cartButton && excludeMiniCartFromPaths.includes(window.location.pathname)) {
     cartButton.style.display = 'none';
   }
 
   // load nav as fragment
-  const miniCartMeta = getMetadata('mini-cart');
-  const miniCartPath = miniCartMeta ? new URL(miniCartMeta, window.location).pathname : '/mini-cart';
-  loadFragment(miniCartPath).then((miniCartFragment) => {
-    minicartPanel.append(miniCartFragment.firstElementChild);
-  });
+  // const miniCartMeta = getMetadata('mini-cart');
+  // const miniCartPath = miniCartMeta ? new URL(miniCartMeta, window.location).pathname : '/mini-cart';
+  // loadFragment(miniCartPath).then((miniCartFragment) => {
+  //   minicartPanel.append(miniCartFragment.firstElementChild);
+  // });
 
   async function toggleMiniCart(state) {
+    if (!minicartPanel) return;
     const show = state ?? !minicartPanel.classList.contains('nav-tools-panel--show');
     const stateChanged = show !== minicartPanel.classList.contains('nav-tools-panel--show');
     minicartPanel.classList.toggle('nav-tools-panel--show', show);
@@ -265,12 +270,15 @@ export default async function decorate(block) {
     }
   }
 
-  cartButton.addEventListener('click', () => toggleMiniCart());
+  if (cartButton) {
+    cartButton.addEventListener('click', () => toggleMiniCart());
+  }
 
   // Cart Item Counter
   events.on(
     'cart/data',
     (data) => {
+      if (!cartButton) return;
       if (data?.totalQuantity) {
         cartButton.setAttribute('data-count', data.totalQuantity);
       } else {
@@ -327,7 +335,12 @@ export default async function decorate(block) {
 
   // Close panels when clicking outside
   document.addEventListener('click', (e) => {
-    if (!minicartPanel.contains(e.target) && !cartButton.contains(e.target)) {
+    if (
+      minicartPanel
+      && cartButton
+      && !minicartPanel.contains(e.target)
+      && !cartButton.contains(e.target)
+    ) {
       toggleMiniCart(false);
     }
 
