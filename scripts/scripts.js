@@ -467,8 +467,21 @@ if (/\.(stage-ue|ue)\.da\.live$/.test(window.location.hostname)) {
 
 loadPage();
 
-(async function loadDa() {
-  if (!new URL(window.location.href).searchParams.get('dapreview')) return;
+(function da() {
+  const { searchParams } = new URL(window.location.href);
+
+  const lp = searchParams.get('dapreview');
   // eslint-disable-next-line import/no-unresolved
-  import('https://da.live/scripts/dapreview.js').then(({ default: daPreview }) => daPreview(loadPage));
+  if (lp) import('https://da.live/scripts/dapreview.js').then((mod) => mod.default(loadPage));
+
+  const exp = searchParams.get('daexperiment');
+  // eslint-disable-next-line import/no-unresolved
+  if (exp) import('https://da.live/nx/public/plugins/exp/exp.js');
+  
+// (async function loadDa() {
+//   if (!new URL(window.location.href).searchParams.get('dapreview')) return;
+//   console.info('Loading DAP Review script');
+//   // eslint-disable-next-line import/no-unresolved
+//   import('https://da.live/scripts/dapreview.js').then(({ default: daPreview }) => daPreview(loadPage));
+
 }());
