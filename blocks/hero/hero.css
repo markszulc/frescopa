@@ -53,9 +53,8 @@ main > .section.hero-container {
 
 .hero > div > div > p:not(:first-child) {
   margin: 0;
-  max-width: 34ch;
+  max-width: 43ch;
   color: rgb(247 237 224 / 90%);
-  font: normal normal 400 clamp(1.8rem, 1.3vw, 2.8rem) / 1.26 var(--type-base-font-family);
   text-shadow: 0 4px 22px rgb(0 0 0 / 22%);
 }
 
@@ -118,6 +117,31 @@ main > .section.hero-container {
   color: #f7efe3;
   font: normal normal normal clamp(2.8rem, 4vw, 5.2rem) / 1.05 Baskerville, serif;
   letter-spacing: 0.02em;
+}
+
+.hero blockquote {
+  margin: 0;
+  font-style: normal;
+  text-indent: 0;
+}
+
+.hero blockquote h1::before {
+  content: '“';
+  position: absolute;
+  top: 0;
+  left: -0.45em;
+}
+
+.hero blockquote h1::after {
+  content: '”';
+  position: absolute;
+  right: -0.34em;
+  bottom: 0;
+}
+
+.hero blockquote h1 {
+  position: relative;
+  display: inline-block;
 }
 
 .hero .button-container {
