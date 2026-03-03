@@ -4,6 +4,10 @@
       "title": "Cards",
       "id": "cards",
       "plugins": {
+        "da": {
+          "rows": 1,
+          "columns": 2
+        },
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block",
@@ -19,6 +23,15 @@
       "title": "Card",
       "id": "card",
       "plugins": {
+         "da": {
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            { "name": "image", "selector": "div:nth-child(1)>picture>img[src]"},
+            { "name": "imageAlt", "selector": "div:nth-child(1)>picture>img[alt]"},
+            { "name": "text", "selector": "div:nth-child(2)" }
+          ]
+        },
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",

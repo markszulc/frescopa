@@ -4,6 +4,16 @@
       "title": "Image",
       "id": "image",
       "plugins": {
+        "da": {
+          "name": "image",
+          "type": "image",
+          "fields": [
+            {
+              "name": "imageAlt",
+              "selector": "img[alt]"
+            }
+          ]
+        },
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/image/v1/image",
