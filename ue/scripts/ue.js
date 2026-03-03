@@ -10,11 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-import { showSlide } from '../../blocks/carousel/carousel.js';
 import { moveInstrumentation } from './ue-utils.js';
 
 const setupObservers = () => {
-  const mutatingBlocks = document.querySelectorAll('div.cards, div.carousel, div.accordion');
+  const mutatingBlocks = document.querySelectorAll('div.cards, div.accordion');
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.type === 'childList' && mutation.target.tagName === 'DIV') {
@@ -55,22 +54,6 @@ const setupObservers = () => {
             if (addedElements.length === 1 && addedElements[0].tagName === 'DETAILS') {
               moveInstrumentation(removedElements[0], addedElements[0]);
               moveInstrumentation(removedElements[0].querySelector('div'), addedElements[0].querySelector('summary'));
-            }
-            break;
-          case 'carousel':
-            if (removedElements.length === 1 && removedElements[0].attributes['data-aue-component']?.value === 'carousel-item') {
-              const resourceAttr = removedElements[0].getAttribute('data-aue-resource');
-              if (resourceAttr) {
-                const itemMatch = resourceAttr.match(/item-(\d+)/);
-                if (itemMatch && itemMatch[1]) {
-                  const slideIndex = parseInt(itemMatch[1], 10);
-                  const slides = mutation.target.querySelectorAll('li.carousel-slide');
-                  const targetSlide = Array.from(slides).find((slide) => parseInt(slide.getAttribute('data-slide-index'), 10) === slideIndex);
-                  if (targetSlide) {
-                    moveInstrumentation(removedElements[0], targetSlide);
-                  }
-                }
-              }
             }
             break;
           default:
@@ -120,11 +103,6 @@ const setupUEEventHandlers = () => {
               details.open = false;
             });
             element.open = true;
-            break;
-          case 'carousel':
-            if (index) {
-              showSlide(blockEl, index);
-            }
             break;
           case 'tabs':
             if (element === block) {
