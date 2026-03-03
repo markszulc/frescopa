@@ -1,62 +1,172 @@
-.hero-container .hero-wrapper {
-  padding: 0;
+main > .section.hero-container {
+  margin: 0;
+}
 
+.hero-container .hero-wrapper {
+  max-width: unset;
+  padding: 0;
 }
 
 .hero {
-  position: relative;
-  padding: 0;
-  border-radius: 12px;
-  min-height: 200px;
-  overflow: hidden;
+  --hero-image-bleed: 150px;
 
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: clamp(560px, 72vh, 760px);
+  border-radius: 0;
+  overflow: hidden;
+  padding: 0;
+  background-color: #2f2318;
+  color: #f5ede0;
 }
 
-.hero picture::after {
+.hero::before {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(20 13 8 / 88%) 0%,
+      rgb(24 16 10 / 72%) 30%,
+      rgb(29 20 12 / 40%) 54%,
+      rgb(29 20 12 / 0%) 72%
+    ),
+    linear-gradient(180deg, rgb(30 21 13 / 8%) 0%, rgb(30 21 13 / 36%) 100%);
+}
+
+.hero > div {
+  width: 1360px;
+  margin: auto;
+}
+
+.hero > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.hero > div > div > p:not(:first-child) {
+  margin: 0;
+  max-width: 34ch;
+  color: rgb(247 237 224 / 90%);
+  font: normal normal 400 clamp(1.8rem, 1.3vw, 2.8rem) / 1.26 var(--type-base-font-family);
+  text-shadow: 0 4px 22px rgb(0 0 0 / 22%);
+}
+
+.hero > div > div > p:first-child {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   z-index: 0;
-  background: rgba(0,0,0,0.5); /* 50% black overlay */
   pointer-events: none;
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: #fff;
-}
-
-.hero h3 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: #fff;
-}
-
-.hero picture,
-.hero img {
-  z-index: -1;
-}
-
-.hero picture {
+.hero > div > div picture {
   position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
+  z-index: 0;
+  inset: 0 calc(var(--hero-image-bleed) * -1);
   box-sizing: border-box;
 }
 
-.hero img {
-  object-fit: cover;
+.hero > div > div picture img {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center right;
+  filter: saturate(86%) contrast(102%);
   view-transition-name: hero;
+}
+
+.hero > div > div > *:not(p:first-child) {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h3,
+.hero h4,
+.hero h5,
+.hero h6 {
+  margin: 0;
+  color: rgb(255 248 237 / 88%);
+  font: normal normal 500 clamp(1.4rem, 1.4vw, 1.95rem) / 1.2 var(--type-base-font-family);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  color: #f7efe3;
+  font: normal normal normal clamp(4rem, 7vw, 6rem) / 0.95 Baskerville, serif;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+  text-shadow: 0 14px 34px rgb(0 0 0 / 36%);
+}
+
+.hero h2 {
+  margin: 0;
+  color: #f7efe3;
+  font: normal normal normal clamp(2.8rem, 4vw, 5.2rem) / 1.05 Baskerville, serif;
+  letter-spacing: 0.02em;
+}
+
+.hero .button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.hero .button-container .button:any-link {
+  margin: 0;
+  border-radius: 999px;
+  border: 1px solid rgb(247 231 205 / 46%);
+  background-color: rgb(14 10 6 / 48%);
+  color: #f6ebda;
+  padding: 12px 26px;
+  font: normal normal 500 clamp(1.7rem, 1.35vw, 2.35rem) / 1.1 var(--type-base-font-family);
+  letter-spacing: 0;
+  backdrop-filter: blur(2px);
+}
+
+.hero .button-container .button:any-link:hover,
+.hero .button-container .button:any-link:focus-visible {
+  background-color: rgb(35 24 15 / 78%);
+  border-color: rgb(247 231 205 / 66%);
+}
+
+.hero .button-container .button:not(.secondary):any-link {
+  background-color: #f4e7d4;
+  border-color: #f4e7d4;
+  color: #2a1e14;
+  box-shadow: 0 10px 24px rgb(8 4 1 / 28%);
+}
+
+.hero .button-container .button:not(.secondary):any-link:hover,
+.hero .button-container .button:not(.secondary):any-link:focus-visible {
+  background-color: #f7efde;
+  border-color: #f7efde;
+}
+
+.hero .button-container .button.secondary:any-link {
+  background-color: rgb(14 10 6 / 40%);
+  border-color: rgb(247 231 205 / 42%);
+  color: #f7efdf;
 }
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    border-radius: 0;
   }
 }
