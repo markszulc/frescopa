@@ -4,7 +4,8 @@ main > .section.hero-container {
 
 .hero-container .hero-wrapper {
   max-width: unset;
-  padding: 0;
+  padding: 0 0 40px;
+  margin: 0 0 40px;
 }
 
 .hero {
@@ -56,6 +57,8 @@ main > .section.hero-container {
   max-width: 43ch;
   color: rgb(247 237 224 / 90%);
   text-shadow: 0 4px 22px rgb(0 0 0 / 22%);
+  font-size: 22px;
+  line-height: 1.2;
 }
 
 .hero > div > div > p:first-child {
@@ -98,7 +101,7 @@ main > .section.hero-container {
 .hero h6 {
   margin: 0;
   color: rgb(255 248 237 / 88%);
-  font: normal normal 500 clamp(1.4rem, 1.4vw, 1.95rem) / 1.2 var(--type-base-font-family);
+  font: normal normal 200 20px / 1.2 var(--type-base-font-family);
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -106,7 +109,7 @@ main > .section.hero-container {
 .hero h1 {
   margin: 0;
   color: #f7efe3;
-  font: normal normal normal clamp(4rem, 7vw, 6rem) / 0.95 Baskerville, serif;
+  font: normal normal normal 64px / 68px Baskerville, serif;
   letter-spacing: 0.01em;
   text-wrap: balance;
   text-shadow: 0 14px 34px rgb(0 0 0 / 36%);
@@ -159,7 +162,7 @@ main > .section.hero-container {
   background-color: rgb(14 10 6 / 48%);
   color: #f6ebda;
   padding: 12px 26px;
-  font: normal normal 500 clamp(1.7rem, 1.35vw, 2.35rem) / 1.1 var(--type-base-font-family);
+  font: normal normal 500 18px / 1.1 var(--type-base-font-family);
   letter-spacing: 0;
   backdrop-filter: blur(2px);
 }
@@ -171,22 +174,28 @@ main > .section.hero-container {
 }
 
 .hero .button-container .button:not(.secondary):any-link {
-  background-color: #f4e7d4;
-  border-color: #f4e7d4;
-  color: #2a1e14;
+  background-color: #f4e9dc;
+  border-color: #f4e9dc;
+  color: #58181d;
   box-shadow: 0 10px 24px rgb(8 4 1 / 28%);
 }
 
 .hero .button-container .button:not(.secondary):any-link:hover,
 .hero .button-container .button:not(.secondary):any-link:focus-visible {
-  background-color: #f7efde;
-  border-color: #f7efde;
+  background-color: #f9f0e5;
+  border-color: #f9f0e5;
 }
 
 .hero .button-container .button.secondary:any-link {
-  background-color: rgb(14 10 6 / 40%);
-  border-color: rgb(247 231 205 / 42%);
-  color: #f7efdf;
+  background-color: transparent;
+  border-color: rgb(244 233 220 / 70%);
+  color: #f4e9dc;
+}
+
+.hero .button-container .button.secondary:any-link:hover,
+.hero .button-container .button.secondary:any-link:focus-visible {
+  background-color: rgb(244 233 220 / 10%);
+  border-color: rgb(244 233 220 / 90%);
 }
 
 @media (width >= 900px) {
